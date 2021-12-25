@@ -28,7 +28,7 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
   const featImg = post.featureImage
   const readingTime = readingTimeHelper(post).replace(`min read`, text(`MIN_READ`))
   const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: !!featImg })
-  const large = (featImg && isHome && num !== undefined && 0 === num % 6 && `post-card-large`) || ``
+  const large = (featImg && isHome && num !== undefined && `post-card-large`) || ``
   const authors = post?.authors?.filter((_, i) => (i < 2 ? true : false))
 
   return (

@@ -608,11 +608,16 @@ html.casper .posts {
 
 html.casper .post-feed {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -20px;
-    padding: 50px 0 0;
-    background: #fff;
+    display: grid;
+    grid-gap: 4vmin;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 4vmin 0;
+}
+
+html.casper .post-feed.list {
+    row-gap: 6vmin;
+    max-width: 940px;
+    margin: 2vmin auto 0;
 }
 
 html.casper .post-card {
@@ -620,12 +625,9 @@ html.casper .post-card {
     flex: 1 1 301px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    margin: 0 0 40px;
-    padding: 0 20px 40px;
     min-height: 220px;
-    border-bottom: 1px solid color-mod(var(--lightgrey) l(+12%));
     background-size: cover;
+    word-break: break-word;
 }
 
 html.casper .post-card-image-link {
@@ -698,6 +700,11 @@ html.casper .post-card-excerpt {
 
 html.casper .post-card-excerpt p {
     margin-bottom: 1em;
+    display: -webkit-box;
+    overflow-y: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
 }
 
 html.casper .post-card-meta {
@@ -842,11 +849,12 @@ make sure this only happens on large viewports / desktop-ish devices.
 
 @media (min-width: 795px) {
     html.casper .post-card-large {
-        flex: 1 1 100%;
-        flex-direction: row;
-        padding-bottom: 40px;
-        min-height: 280px;
-        border-top: 0;
+    	grid-column: 1/span 3;
+	display: grid;
+    	grid-gap: 4vmin;
+    	grid-template-columns: 3fr 5fr;
+    	min-height: auto;
+    	border-top: 0;
     }
 
     html.casper .post-card-large:hover {
@@ -859,20 +867,15 @@ make sure this only happens on large viewports / desktop-ish devices.
 
     html.casper .post-card-large .post-card-image-link {
         position: relative;
-        flex: 1 1 auto;
-        margin-bottom: 0;
-        min-height: 380px;
-    }
-
-    html.casper .post-card-large .post-card-image {
-        position: absolute;
-        width: 100%;
-        height: 100%;
+	grid-column: 1/span 1;
+    	height: max-content;
+    	min-height: auto;
+	margin-bottom: 0;
     }
 
     html.casper .post-card-large .post-card-content {
-        flex: 0 1 361px;
-        justify-content: center;
+	justify-content: flex-start;
+    	margin-top: -6px;
     }
 
     html.casper .post-card-large .post-card-title {
@@ -880,18 +883,19 @@ make sure this only happens on large viewports / desktop-ish devices.
         font-size: 3.2rem;
     }
 
-    html.casper .post-card-large .post-card-content-link {
-        padding: 0 0 0 40px;
-    }
-
     html.casper .post-card-large .post-card-meta {
-        padding: 0 0 0 40px;
+	display: flex;
+    	align-items: center;
+    	padding: 0;
     }
 
     html.casper .post-card-large .post-card-excerpt p {
-        margin-bottom: 1.5em;
-        font-size: 1.8rem;
-        line-height: 1.5em;
+	margin-bottom: 1em;
+    	display: -webkit-box;
+    	overflow-y: hidden;
+    	-webkit-line-clamp: 3;
+    	-webkit-box-orient: vertical;
+    	word-break: break-word;
     }
 }
 
@@ -1688,7 +1692,7 @@ html.casper .basic-info .avatar-wrapper svg {
 /* ---------------------------------------------------------- */
 html.casper .subscribe-form {
     margin: 1.5em 0;
-    padding: 6.5vw 7vw 8vw;
+    padding: 3.5vw 8vw 2vw;
     border: color-mod(var(--lightgrey) l(+10%)) 1px solid;
     text-align: center;
     background: linear-gradient(color-mod(var(--whitegrey) l(+6%)), color-mod(var(--whitegrey) l(+4%)));
@@ -1865,10 +1869,11 @@ html.casper .read-next {
 }
 
 html.casper .read-next-feed {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     margin: 0 -25px;
     padding: 60px 0 0 0;
+    grid-gap: 4vmin;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 html.casper .read-next .post-card {
@@ -2042,12 +2047,33 @@ html.casper .read-next-card-footer a:hover {
     }
 }
 
-@media (max-width: 650px) {
-    html.casper .read-next-feed {
-        flex-direction: column;
-        padding: 25px 0 0;
-    }
 
+@media (max-width: 1000px) {
+    html.casper .read-next-feed article:nth-child(3) {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    html.casper .read-next-feed article:nth-child(2) {
+    	display: none;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    html.casper .read-next-feed {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    html.casper .read-next-feed {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
     html.casper .read-next-card {
         flex: 1 1 auto;
         margin: 0 25px;
@@ -2695,7 +2721,7 @@ html.casper .subscribe-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(9,10,11,0.97);
+    background: rgba(26,28,32);
     opacity: 0;
     transition: opacity 0.2s ease-in;
     pointer-events: none;
