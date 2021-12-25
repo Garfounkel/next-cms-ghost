@@ -1,3 +1,10 @@
+# next-cms-ghost-list-feed
+This fork modify the theme to make it look as close as possible to the list feed settings from the casper theme. Here's how the list feed homepage looks like:
+![Homepage screenshot](/casper-list-feed.png)
+
+
+# Original Readme starting here
+
 ![next-cms-ghost](https://static.gotsby.org/v1/assets/images/next-ghost.png)
 
 # next-cms-ghost
